@@ -16,7 +16,12 @@ use App\Http\Controllers\Api\ProjectController;
 |
 */
 
-Route :: get('/test-api', [ProjectController::class, 'testApi']);
+
+Route::prefix('/v1') -> group(function() {
+
+    Route::get('/test-api', [ProjectController::class, 'testApi']);
+    Route::get('/project-index', [ProjectController::class, 'projectIndex']);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
